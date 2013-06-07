@@ -78,6 +78,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C174C824176169F700B18B62 /* EPub */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = EPub;
+			sourceTree = "<group>";
+		};
 		C1F5A27D1755A0A400C866AB = {
 			isa = PBXGroup;
 			children = (
@@ -122,6 +129,7 @@
 		C1F5A28F1755A0A400C866AB /* GSEPubReader */ = {
 			isa = PBXGroup;
 			children = (
+				C174C824176169F700B18B62 /* EPub */,
 				C1F5A29B1755A0A400C866AB /* Document.h */,
 				C1F5A29C1755A0A400C866AB /* Document.m */,
 				C1F5A29E1755A0A400C866AB /* Document.xib */,

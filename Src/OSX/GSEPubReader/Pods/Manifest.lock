@@ -1,10 +1,13 @@
 PODS:
   - GDataXML-HTML (1.1.0)
+  - SSZipArchive (0.2.3)
 
 DEPENDENCIES:
   - GDataXML-HTML
+  - SSZipArchive
 
 SPEC CHECKSUMS:
   GDataXML-HTML: 09d88f174055dc520e9d73076d0a9112c8bcd987
+  SSZipArchive: 737bef17f4cc07dffd75df628374cff71ec36359
 
 COCOAPODS: 0.20.2
