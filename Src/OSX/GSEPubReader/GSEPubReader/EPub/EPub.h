@@ -12,6 +12,6 @@
 
 - (instancetype)initWithPath:(NSString *)path;
 
-@property (strong, nonatomic) NSString *path;
+@property (readonly, nonatomic) NSString *path;
 
 @end

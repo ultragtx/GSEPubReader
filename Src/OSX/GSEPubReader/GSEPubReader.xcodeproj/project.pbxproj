@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		144E3AB1C24C4C3D81BC2BE3 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 09D49E529D5C47A990B02CEE /* libPods.a */; };
 		C174C8271762F3F800B18B62 /* EPub.m in Sources */ = {isa = PBXBuildFile; fileRef = C174C8261762F3F800B18B62 /* EPub.m */; };
+		C174C82C17631F6300B18B62 /* FileMD5Hash.m in Sources */ = {isa = PBXBuildFile; fileRef = C174C82A17631F6300B18B62 /* FileMD5Hash.m */; };
 		C1F5A28A1755A0A400C866AB /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C1F5A2891755A0A400C866AB /* Cocoa.framework */; };
 		C1F5A2941755A0A400C866AB /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C1F5A2921755A0A400C866AB /* InfoPlist.strings */; };
 		C1F5A2961755A0A400C866AB /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C1F5A2951755A0A400C866AB /* main.m */; };
@@ -37,6 +38,8 @@
 		C174C8251762F3F800B18B62 /* EPub.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EPub.h; sourceTree = "<group>"; };
 		C174C8261762F3F800B18B62 /* EPub.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EPub.m; sourceTree = "<group>"; };
 		C174C8291762F6E500B18B62 /* GSLogUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GSLogUtils.h; sourceTree = "<group>"; };
+		C174C82A17631F6300B18B62 /* FileMD5Hash.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FileMD5Hash.m; sourceTree = "<group>"; };
+		C174C82B17631F6300B18B62 /* FileMD5Hash.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileMD5Hash.h; sourceTree = "<group>"; };
 		C1F5A2861755A0A400C866AB /* GSEPubReader.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GSEPubReader.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C1F5A2891755A0A400C866AB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		C1F5A28C1755A0A400C866AB /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -94,6 +97,8 @@
 		C174C8281762F6CB00B18B62 /* GSUtils */ = {
 			isa = PBXGroup;
 			children = (
+				C174C82B17631F6300B18B62 /* FileMD5Hash.h */,
+				C174C82A17631F6300B18B62 /* FileMD5Hash.m */,
 				C174C8291762F6E500B18B62 /* GSLogUtils.h */,
 			);
 			path = GSUtils;
@@ -327,6 +332,7 @@
 				C1F5A2961755A0A400C866AB /* main.m in Sources */,
 				C1F5A29D1755A0A400C866AB /* Document.m in Sources */,
 				C174C8271762F3F800B18B62 /* EPub.m in Sources */,
+				C174C82C17631F6300B18B62 /* FileMD5Hash.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

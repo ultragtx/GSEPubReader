@@ -7,26 +7,27 @@
 //
 
 #import "GSEPubReaderTests.h"
+#import "EPub.h"
 
 @implementation GSEPubReaderTests
 
-- (void)setUp
-{
+- (void)setUp {
     [super setUp];
     
     // Set-up code here.
 }
 
-- (void)tearDown
-{
+- (void)tearDown {
     // Tear-down code here.
     
     [super tearDown];
 }
 
-- (void)testExample
-{
-    STFail(@"Unit tests are not implemented yet in GSEPubReaderTests");
+- (void)testEPub {
+    EPub *ep = [[EPub alloc] initWithPath:@"/Users/ultragtx/Desktop/GSEPubReader/SampleEPub/1.epub"];
+    NSString *unarchivedPath = [ep performSelector:@selector(unarchivedPath)];
+    NSFileManager *manager = [NSFileManager defaultManager];
+    STAssertTrue([manager fileExistsAtPath:unarchivedPath], @"Failed initializing epub file");
 }
 
 @end
