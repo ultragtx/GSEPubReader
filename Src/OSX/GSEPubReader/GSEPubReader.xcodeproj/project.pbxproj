@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		144E3AB1C24C4C3D81BC2BE3 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 09D49E529D5C47A990B02CEE /* libPods.a */; };
+		C174C8271762F3F800B18B62 /* EPub.m in Sources */ = {isa = PBXBuildFile; fileRef = C174C8261762F3F800B18B62 /* EPub.m */; };
 		C1F5A28A1755A0A400C866AB /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C1F5A2891755A0A400C866AB /* Cocoa.framework */; };
 		C1F5A2941755A0A400C866AB /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C1F5A2921755A0A400C866AB /* InfoPlist.strings */; };
 		C1F5A2961755A0A400C866AB /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C1F5A2951755A0A400C866AB /* main.m */; };
@@ -33,6 +34,9 @@
 
 /* Begin PBXFileReference section */
 		09D49E529D5C47A990B02CEE /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		C174C8251762F3F800B18B62 /* EPub.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EPub.h; sourceTree = "<group>"; };
+		C174C8261762F3F800B18B62 /* EPub.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EPub.m; sourceTree = "<group>"; };
+		C174C8291762F6E500B18B62 /* GSLogUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GSLogUtils.h; sourceTree = "<group>"; };
 		C1F5A2861755A0A400C866AB /* GSEPubReader.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GSEPubReader.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C1F5A2891755A0A400C866AB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		C1F5A28C1755A0A400C866AB /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -81,8 +85,18 @@
 		C174C824176169F700B18B62 /* EPub */ = {
 			isa = PBXGroup;
 			children = (
+				C174C8251762F3F800B18B62 /* EPub.h */,
+				C174C8261762F3F800B18B62 /* EPub.m */,
 			);
 			path = EPub;
+			sourceTree = "<group>";
+		};
+		C174C8281762F6CB00B18B62 /* GSUtils */ = {
+			isa = PBXGroup;
+			children = (
+				C174C8291762F6E500B18B62 /* GSLogUtils.h */,
+			);
+			path = GSUtils;
 			sourceTree = "<group>";
 		};
 		C1F5A27D1755A0A400C866AB = {
@@ -129,6 +143,7 @@
 		C1F5A28F1755A0A400C866AB /* GSEPubReader */ = {
 			isa = PBXGroup;
 			children = (
+				C174C8281762F6CB00B18B62 /* GSUtils */,
 				C174C824176169F700B18B62 /* EPub */,
 				C1F5A29B1755A0A400C866AB /* Document.h */,
 				C1F5A29C1755A0A400C866AB /* Document.m */,
@@ -311,6 +326,7 @@
 			files = (
 				C1F5A2961755A0A400C866AB /* main.m in Sources */,
 				C1F5A29D1755A0A400C866AB /* Document.m in Sources */,
+				C174C8271762F3F800B18B62 /* EPub.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -443,6 +459,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "GSEPubReader/GSEPubReader-Prefix.pch";
 				INFOPLIST_FILE = "GSEPubReader/GSEPubReader-Info.plist";
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -456,6 +473,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "GSEPubReader/GSEPubReader-Prefix.pch";
 				INFOPLIST_FILE = "GSEPubReader/GSEPubReader-Info.plist";
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -470,6 +488,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "GSEPubReader/GSEPubReader-Prefix.pch";
 				INFOPLIST_FILE = "GSEPubReaderTests/GSEPubReaderTests-Info.plist";
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = octest;
@@ -485,6 +504,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "GSEPubReader/GSEPubReader-Prefix.pch";
 				INFOPLIST_FILE = "GSEPubReaderTests/GSEPubReaderTests-Info.plist";
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = octest;
