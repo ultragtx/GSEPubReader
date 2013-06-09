@@ -23,6 +23,19 @@ References
 
 * [Epub Format Construction Guide](http://www.hxa.name/articles/content/epub-guide_hxa7241_2007.html)
 
+===
+
+# EPub 3.0
+
+Dir:
+
+/META-INF/
+		|-container.xml		[required]
+		|-signatures.xml	[optional]
+		|-encryption.xml	[optional]
+		|-metadata.xml		[optional]
+		|-rights.xml		[optional]
+		|-manifest.xml		[allowed]
 
 
 ===

@@ -19,6 +19,8 @@
 @property (strong, nonatomic) NSString *md5;
 @property (strong, nonatomic) NSString *unarchivedPath;
 
+@property (strong, nonatomic) NSString *opfPath;
+
 @end
 
 @implementation EPub
@@ -28,6 +30,7 @@
     if (self) {
         _path = path;
         [self prepare];
+        [self parse];
     }
     return self;
 }
@@ -88,5 +91,31 @@
 
 #pragma mark - Parse
 
+- (void)parse {
+    [self parseContainerXML];
+}
+
+- (BOOL)parseContainerXML {
+    // Get the path of opf file
+    BOOL success = NO;
+    NSString *path = [_unarchivedPath stringByAppendingPathComponent:@"META-INF/container.xml"];
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    if ([fileManager fileExistsAtPath:path]) {
+        NSData *xmlData = [NSData dataWithContentsOfFile:path];
+        NSError *error;
+        GDataXMLDocument *doc = [[GDataXMLDocument alloc] initWithData:xmlData error:&error];
+        if (!error) {
+            GDataXMLNode *node = [doc firstNodeForXPath:@"//_def_ns:rootfile[@media-type='application/oebps-package+xml']/@full-path" error:&error];
+            if (node) {
+                _opfPath = [_unarchivedPath stringByAppendingPathComponent:[node stringValue]];
+                success = YES;
+            }
+        }
+        else {
+            GSALog(@"[ERROR]: %@", [error description]);
+        }
+    }
+    return success;
+}
 
 @end
