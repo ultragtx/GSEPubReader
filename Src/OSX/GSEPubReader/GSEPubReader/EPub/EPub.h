@@ -14,4 +14,26 @@
 
 @property (readonly, nonatomic) NSString *path;
 
+@property (readonly, nonatomic) NSDictionary *metadata;
+
+@end
+
+
+#pragma mark - Entities
+
+@interface ManifestItem : NSObject
+
+@property (strong, nonatomic) NSString *href;
+@property (strong, nonatomic) NSString *itemId;
+@property (strong, nonatomic) NSString *mediaType;
+
+@end
+
+
+@interface GuideItem : NSObject
+
+@property (strong, nonatomic) NSString *href;
+@property (strong, nonatomic) NSString *title;
+@property (strong, nonatomic) NSString *type;
+
 @end

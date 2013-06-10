@@ -21,6 +21,11 @@
 
 @property (strong, nonatomic) NSString *opfPath;
 
+@property (strong, nonatomic) NSDictionary *metadata;
+@property (strong, nonatomic) NSDictionary *manifest;
+@property (strong, nonatomic) NSArray *spine;
+@property (strong, nonatomic) NSDictionary *reference;
+
 @end
 
 @implementation EPub
@@ -92,7 +97,7 @@
 #pragma mark - Parse
 
 - (void)parse {
-    [self parseContainerXML];
+    [self parseContainerXML] && [self parseOPF] && [self parseTocNcx];
 }
 
 - (BOOL)parseContainerXML {
@@ -105,6 +110,7 @@
         NSError *error;
         GDataXMLDocument *doc = [[GDataXMLDocument alloc] initWithData:xmlData error:&error];
         if (!error) {
+            // The "_def_ns" is default namespace defined in GDataXMLNode
             GDataXMLNode *node = [doc firstNodeForXPath:@"//_def_ns:rootfile[@media-type='application/oebps-package+xml']/@full-path" error:&error];
             if (node) {
                 _opfPath = [_unarchivedPath stringByAppendingPathComponent:[node stringValue]];
@@ -117,5 +123,83 @@
     }
     return success;
 }
+
+- (BOOL)parseOPF {
+    BOOL success = NO;
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    if ([fileManager fileExistsAtPath:_opfPath]) {
+        NSData *xmlData = [NSData dataWithContentsOfFile:_opfPath];
+        NSError *error;
+        GDataXMLDocument *doc = [[GDataXMLDocument alloc] initWithData:xmlData error:&error];
+        if (!error) {
+            
+            // Metadata
+            // The "_def_ns" is default namespace defined in GDataXMLNode
+            GDataXMLNode *metadataNode = [doc firstNodeForXPath:@"//_def_ns:metadata" error:&error];
+            if (metadataNode) {
+                NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithCapacity:metadataNode.childCount];
+                for (GDataXMLNode *node in [metadataNode children]) {
+                    NSLog(@"%@| %@| %@", node.name, node.prefix, node.stringValue);
+                    if ([[node.name substringWithRange:NSMakeRange(0, 3)] isEqualToString:@"dc:"]) {
+                        [dict setValue:node.stringValue forKey:node.name];
+                    }
+                    else if ([node.name isEqualToString:@"meta"]) {
+                        GDataXMLNode *nameAttr = [node firstNodeForXPath:@"@name" error:&error];
+                        GDataXMLNode *contentAttr = [node firstNodeForXPath:@"@content" error:&error];
+                        if (nameAttr) {
+                            [dict setValue:contentAttr.stringValue forKey:nameAttr.stringValue];
+                        }
+                    }
+                }
+                _metadata = [NSDictionary dictionaryWithDictionary:dict];
+            }
+            
+            
+            // Manifest
+            GDataXMLNode *manifestNode = [doc firstNodeForXPath:@"//_def_ns:manifest" error:&error];
+            if (manifestNode) {
+                NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithCapacity:manifestNode.childCount];
+                for (GDataXMLNode *node in [manifestNode children]) {
+                    GDataXMLNode *idAttr = [node firstNodeForXPath:@"@id" error:&error];
+                    GDataXMLNode *hrefAttr = [node firstNodeForXPath:@"@href" error:&error];
+                    // !!!: Did not use media-type
+                    if (idAttr && hrefAttr) {
+                        [dict setValue:hrefAttr.stringValue forKey:idAttr.stringValue];
+                    }
+                }
+                _manifest = [NSDictionary dictionaryWithDictionary:dict];
+            }
+            
+            // Spine
+            GDataXMLNode *spineNode = [doc firstNodeForXPath:@"//_def_ns:spine" error:&error];
+            if (spineNode) {
+                NSMutableArray *arr = [NSMutableArray arrayWithCapacity:spineNode.childCount];
+                for (GDataXMLNode *node in spineNode.children) {
+                    GDataXMLNode *idrefAttr = [node firstNodeForXPath:@"@idref" error:&error];
+                    if (idrefAttr) {
+                        [arr addObject:idrefAttr.stringValue];
+                    }
+                }
+                _spine = [NSArray arrayWithArray:arr];
+            }
+        
+            // Guide
+            GDataXMLNode *guideNode = [doc firstNodeForXPath:@"//_def_ns:guide" error:&error];
+            if (spineNode) {
+                
+                for (GDataXMLNode *node in guideNode.children) {
+                    
+                }
+            }
+            success = YES;
+        }
+        else {
+            GSALog(@"[ERROR]: %@", [error description]);
+        }
+    }
+    return success;
+}
+
+
 
 @end
