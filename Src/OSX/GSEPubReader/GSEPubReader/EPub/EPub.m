@@ -20,6 +20,8 @@
 @property (strong, nonatomic) NSString *unarchivedPath;
 
 @property (strong, nonatomic) NSString *opfPath;
+@property (strong, nonatomic) NSString *opfBasePath;
+@property (strong, nonatomic) NSString *tocNcxPath;
 
 @property (strong, nonatomic) NSDictionary *metadata;
 @property (strong, nonatomic) NSDictionary *manifest;
@@ -200,6 +202,32 @@
     return success;
 }
 
-
+- (BOOL)parseTocNcx {
+    BOOL success = NO;
+    
+    NSString *tocSubPath = [_manifest objectForKey:@"ncx"];
+    if (tocSubPath) {
+        NSInteger slashLoc = [_opfPath rangeOfString:@"/" options:NSBackwardsSearch].location;
+        _opfBasePath = [_opfPath substringToIndex:slashLoc];
+        _tocNcxPath = [_opfBasePath stringByAppendingPathComponent:tocSubPath];
+        
+        NSFileManager *fileManager = [NSFileManager defaultManager];
+        if ([fileManager fileExistsAtPath:_tocNcxPath]) {
+            NSData *xmlData = [NSData dataWithContentsOfFile:_tocNcxPath];
+            NSError *error;
+            GDataXMLDocument *doc = [[GDataXMLDocument alloc] initWithData:xmlData error:&error];
+            if (!error) {
+                
+            }
+            else {
+                GSALog(@"[ERROR]: %@", [error description]);
+            }
+        }
+        
+    }
+    
+    
+    return success;
+}
 
 @end
